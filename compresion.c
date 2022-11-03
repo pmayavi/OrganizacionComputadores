@@ -1,15 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 struct node
 {
     int data_element;
+    char char_element;
     struct node *left, *right;
 };
 
-struct node *new_node(int data_element)
+struct node *new_node(char char_element)
 {
     struct node *temp = (struct node *)malloc(sizeof(struct node)); // Allocating memory to the node
-    temp->data_element = data_element;
+    temp->data_element = 1;
+    temp->char_element = char_element;
     temp->left = temp->right = NULL;
     return temp;
 }
@@ -42,8 +45,25 @@ struct node *insert(struct node *node, int data_element) // Function to insert a
 
 int main()
 {
-
-    printf("Welcome to DataFlair tutorials!\n\n");
+    char input[1024];
+    char letters[107];
+    int use[107];
+    gets(input);
+    int new;
+    for (size_t i = 0; i < strlen(input); i++)
+    {
+        new = 1;
+        for (size_t j = 0; j < strlen(letters); j++)
+        {
+            if (input[i] == letters[j])
+            {
+                new = 0;
+                use[j] += 1;
+                break;
+            }
+        }
+        if (new)
+    }
 
     struct node *root = NULL;
     root = insert(root, 10);
