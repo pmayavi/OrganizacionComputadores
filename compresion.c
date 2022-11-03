@@ -4,16 +4,19 @@
 struct node
 {
     int data_element;
+    int uses;
     char char_element;
-    struct node *left, *right;
+    struct node *left, *right, *father;
 };
 
-struct node *new_node(char char_element)
+struct node *new_node(int uses, char char_element, struct node *father)
 {
     struct node *temp = (struct node *)malloc(sizeof(struct node)); // Allocating memory to the node
     temp->data_element = 1;
+    temp->uses = uses;
     temp->char_element = char_element;
     temp->left = temp->right = NULL;
+    temp->father = father;
     return temp;
 }
 
@@ -47,9 +50,12 @@ int main()
 {
     char input[1024];
     char letters[107];
+    size_t let = 0;
     int use[107];
     gets(input);
     int new;
+    struct node *root = NULL;
+    root = insert(root, 10);
     for (size_t i = 0; i < strlen(input); i++)
     {
         new = 1;
@@ -63,6 +69,8 @@ int main()
             }
         }
         if (new)
+        {
+        }
     }
 
     struct node *root = NULL;
