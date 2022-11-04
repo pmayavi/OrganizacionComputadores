@@ -143,12 +143,11 @@ int main()
         new = 1;
         for (size_t j = 0; j < strlen(letters); j++)
         {
-            int ch = input[i];
             printf("%c", -159);
-            printf("%c", ch);
-            if ((ch < 32 || ch > 127) && (ch > -159 || ch < -164))
+            printf("%c", input[i]);
+            if ((input[i] < 32 || input[i] > 127) && (input[i] > -159 || input[i] < -164))
             {
-                switch (ch)
+                switch (input[i])
                 {
                 case 130: // e
                 case 144: // E
