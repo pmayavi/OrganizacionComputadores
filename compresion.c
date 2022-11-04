@@ -116,30 +116,7 @@ void print_nodes(struct node *node, char binary[], int position)
 
     if (node->char_element)
     {
-        if (node->parent->left->char_element)
-        {
-            binary[position] = '1';
-            position++;
-        }
-        if (node->parent->right->char_element)
-        {
-            binary[position] = '0';
-            position++;
-        }
-        printf("[%c,%d,%s]\n", node->char_element, node->uses, binary);
-    }
-    else
-    {
-        if (node->parent->left->char_element)
-        {
-            binary[position] = '1';
-            position++;
-        }
-        if (node->parent->right->char_element)
-        {
-            binary[position] = '0';
-            position++;
-        }
+        printf("[%c,%d,bin]\n", node->char_element, node->uses);
     }
     if (node->left)
         print_nodes(node->left, binary, position);
