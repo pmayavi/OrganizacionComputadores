@@ -58,8 +58,8 @@ int main()
     char letters[107];
     size_t let = 0;
     int num[107];
-    fgets(input, 2, stdin);
-    printf("boing1.1");
+    fgets(input, 4, stdin);
+    printf("%s", input);
     int new;
     struct node *root = new_node(0, 0, NULL);
     printf("boing2");
