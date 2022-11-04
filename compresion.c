@@ -43,8 +43,8 @@ void insert(struct node *father, struct node *node) // Function to insert a new 
     }
     else
     {
-        recursion(father->left, node);
-        recursion(father->right, node);
+        insert(father->left, node);
+        insert(father->right, node);
     }
 }
 
