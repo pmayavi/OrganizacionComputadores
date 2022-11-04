@@ -61,14 +61,18 @@ void insert(struct node *parent, struct node *node) // Function to insert a new 
 
 void exchange(struct node *node, struct node *objective)
 {
-    printf("\nnode:%d\nobjective:%d\n", node->parent->data_element, objective->parent->data_element);
+    printf("\nnode:%d %c\nobjective:%d %c\n", node->parent->data_element, node->parent->right->char_element, objective->parent->data_element, objective->parent->left->char_element);
     struct node *temp = node->parent;
+    printf("\nnode:%d %c\nobjective:%d %c\n", node->parent->data_element, node->parent->right->char_element, objective->parent->data_element, objective->parent->left->char_element);
     node->parent = objective->parent;
+    printf("\nnode:%d %c\nobjective:%d %c\n", node->parent->data_element, node->parent->right->char_element, objective->parent->data_element, objective->parent->left->char_element);
     objective->parent->right = node;
+    printf("\nnode:%d %c\nobjective:%d %c\n", node->parent->data_element, node->parent->right->char_element, objective->parent->data_element, objective->parent->left->char_element);
 
     objective->parent = temp;
+    printf("\nnode:%d %c\nobjective:%d %c\n", node->parent->data_element, node->parent->right->char_element, objective->parent->data_element, objective->parent->left->char_element);
     temp->left = objective;
-    printf("\nnode:%d\nobjective:%d\n", node->parent->data_element, objective->parent->data_element);
+    printf("\nnode:%d %c\nobjective:%d %c\n", node->parent->data_element, node->parent->right->char_element, objective->parent->data_element, objective->parent->left->char_element);
 
     ParentValue(temp);
     ParentValue(node);
