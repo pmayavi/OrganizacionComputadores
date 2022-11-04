@@ -52,7 +52,7 @@ void insert(struct node *father, struct node *node) // Function to insert a new 
 int main()
 {
     printf("boing1");
-    char input[MAX];
+    char *input = malloc(sizeof(char) * MAX);
     char letters[107];
     size_t let = 0;
     int num[107];
