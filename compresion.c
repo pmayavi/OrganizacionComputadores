@@ -64,9 +64,13 @@ void exchange(struct node *node, struct node *objective)
 {
     struct node *temp = node->parent;
     node->parent = objective->parent;
+    node->parent->uses = node->parent->uses - node->uses;
+    objective->parent->uses = objective->parent->uses - objective->uses;
     objective->parent = temp;
     node->parent->right = node;
     objective->parent->left = objective;
+    node->parent->uses = node->parent->uses + node->uses;
+    objective->parent->uses = objective->parent->uses + objective->uses;
 }
 
 void ParentValue(struct node *parent)
@@ -143,6 +147,7 @@ int main()
                 temp = find(root, letters[j]);
                 printf("%d\n", temp->uses);
                 temp->uses += 1;
+                ParentValue(temp->parent);
                 compare(temp);
                 break;
             }
