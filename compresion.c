@@ -61,18 +61,17 @@ void insert(struct node *parent, struct node *node) // Function to insert a new 
 
 void exchange(struct node *node, struct node *objective)
 {
-    printf("\nnode:%d %c\nobjective:%d %c\n", node->data_element, node->right->char_element, objective->parent->data_element, objective->parent->right->char_element);
+    printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->right->char_element);
     struct node *temp = node->parent;
-    printf("\nnode:%d %c\nobjective:%d %c\n", node->data_element, node->right->char_element, objective->parent->data_element, objective->parent->right->char_element);
     node->parent = objective->parent;
-    printf("\nnode:%d %c\nobjective:%d %c\n", node->data_element, node->right->char_element, objective->parent->data_element, objective->parent->right->char_element);
+    printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->right->char_element);
     objective->parent->right = node;
-    printf("\nnode:%d %c\nobjective:%d %c\n", node->data_element, node->right->char_element, objective->parent->data_element, objective->parent->right->char_element);
+    printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->right->char_element);
 
     objective->parent = temp;
-    printf("\nnode:%d %c\nobjective:%d %c\n", node->data_element, node->right->char_element, objective->parent->data_element, objective->parent->right->char_element);
+    printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->right->char_element);
     objective->parent->left = objective;
-    printf("\nnode:%d %c\nobjective:%d %c\n", node->data_element, node->right->char_element, objective->parent->data_element, objective->parent->right->char_element);
+    printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->right->char_element);
 
     ParentValue(temp);
     ParentValue(node);
