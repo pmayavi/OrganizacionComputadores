@@ -67,20 +67,20 @@ void exchange(struct node *node, struct node *objective)
 
     objective->parent = temp;
     objective->parent->left = objective;
-
+    return 0;
     ParentValue(objective->parent);
     ParentValue(node);
 }
 
-void ParentValue(struct node *parent)
+void ParentValue(struct node *node)
 {
     int Lchild = 0;
-    if (parent->left)
-        Lchild = parent->left->uses;
-    int Rchild = parent->right->uses;
-    parent->uses = Lchild + Rchild;
-    if (parent->parent)
-        ParentValue(parent->parent);
+    if (node->left)
+        Lchild = node->left->uses;
+    int Rchild = node->right->uses;
+    node->uses = Lchild + Rchild;
+    if (node->parent)
+        ParentValue(node->parent);
 }
 
 int compare(struct node *node)
