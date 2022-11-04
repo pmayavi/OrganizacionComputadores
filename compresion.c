@@ -126,6 +126,8 @@ int main()
             {
                 new = 0;
                 // aqui es repetido
+                nodes[i]->uses += 1;
+                compare(nodes[i]);
                 break;
             }
         }
