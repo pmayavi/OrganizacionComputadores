@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define MAX 1024
 struct node
 {
     int data_element;
@@ -30,6 +31,7 @@ void display(struct node *root) // A function for the inroder traversal of the b
     }
 }
 
+void insert(struct node *, struct node *);
 void insert(struct node *father, struct node *node) // Function to insert a new node
 {
     if (father->char_element != 0)
@@ -48,11 +50,11 @@ void insert(struct node *father, struct node *node) // Function to insert a new 
 
 int main()
 {
-    char input[1024];
+    char input[MAX];
     char letters[107];
     size_t let = 0;
     int num[107];
-    gets(input);
+    fgets(input, MAX, stdin);
     int new;
     struct node *root = NULL;
     root = new_node(0, 0, NULL);
@@ -70,7 +72,7 @@ int main()
         if (new)
         {
             letters[let++] = input[i];
-            insert(root, input[i]);
+            insert(root, new_node(1, input[i], root));
         }
     }
 
