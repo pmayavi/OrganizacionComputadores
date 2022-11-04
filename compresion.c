@@ -80,9 +80,11 @@ void exchange(struct node *node, struct node *objective)
 void ParentValue(struct node *node)
 {
     int Lchild = 0;
+    int Rchild = 0;
     if (node->left)
         Lchild = node->left->uses;
-    int Rchild = node->right->uses;
+    if (node->left)
+        Rchild = node->right->uses;
     node->uses = Lchild + Rchild;
     if (node->parent)
         ParentValue(node->parent);
