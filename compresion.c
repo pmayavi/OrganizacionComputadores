@@ -109,6 +109,35 @@ int compare(struct node *node)
     }
 }
 
+void navigate(struct node *node, char binary [], int position) // Function to insert a new node
+{
+
+    if(node->char_element){
+        if(node->parent->left->char_element){
+            binary[position] = '1';
+            position++;
+        }
+        if(node->parent->right->char_element){
+            binary[position] = '0';
+            position++;
+        }
+    printf("%c,%d,%d",node->char_element, node->uses, binary);
+
+}else{
+    if(node->parent->left->char_element){
+            binary[position] = '1';
+            position++;
+        }
+        if(node->parent->right->char_element){
+            binary[position] = '0';
+            position++;
+        }
+}
+    navigate(node->left, binary, position);
+    navigate(node->right, binary, position);
+
+}
+
 int main()
 {
     fgets(input, MAX, stdin);
