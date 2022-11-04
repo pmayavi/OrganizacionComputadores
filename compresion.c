@@ -115,6 +115,7 @@ int main()
     size_t let = 0;
     int new;
     struct node *root = new_node(0, 0);
+    struct node *temp;
     for (size_t i = 0; i < strlen(input) - 1; i++)
     {
         new = 1;
@@ -124,7 +125,9 @@ int main()
             {
                 new = 0;
                 // aqui es repetido
-                compare(find(root, letters[j]));
+                temp = find(root, letters[j]);
+                temp->uses += 1;
+                compare(temp);
                 break;
             }
         }
