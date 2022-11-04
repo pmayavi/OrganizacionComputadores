@@ -37,7 +37,6 @@ void display(struct node *root) // A function for the inroder traversal of the b
     if (root != NULL)
     {
         display(root->left);
-        printf("%c \n", root->char_element);
         display(root->right);
     }
 }
@@ -65,12 +64,11 @@ void exchange(struct node *node, struct node *objective)
     struct node *temp = node->parent;
     node->parent = objective->parent;
     node->parent->uses = node->parent->uses - node->uses;
-    objective->parent->uses = objective->parent->uses - objective->uses;
     objective->parent = temp;
     node->parent->right = node;
     objective->parent->left = objective;
-    node->parent->uses = node->parent->uses + node->uses;
-    objective->parent->uses = objective->parent->uses + objective->uses;
+    node->parent->uses = node->parent->left->uses + node->parent->right->uses;
+    objective->parent->uses = objective->parent->left->uses + objective->parent->right->uses;
 }
 
 void ParentValue(struct node *parent)
@@ -88,14 +86,14 @@ int compare(struct node *node)
     struct node *ex = NULL;
     if (node->uses > node->parent->right->uses)
     {
-        while (!temp || temp->parent)
+        do
         {
             temp = temp->parent;
             if (node->uses > temp->right->uses)
             {
                 ex = temp;
             }
-        }
+        } while (temp->parent);
         if (ex)
         {
             exchange(node->parent, ex);
@@ -147,7 +145,7 @@ int main()
                 temp = find(root, letters[j]);
                 printf("%d\n", temp->uses);
                 temp->uses += 1;
-                ParentValue(temp->parent);
+                temp->parent->uses += 1;
                 compare(temp);
                 break;
             }
