@@ -74,11 +74,11 @@ void ParentValue(struct node *parent)
 
 int compare(struct node *node)
 {
+    return 0;
     struct node *temp = node;
     struct node *ex = NULL;
     if (node->uses > node->parent->right->uses)
     {
-        return 0;
         while (!temp || temp->parent)
         {
             temp = temp->parent;
