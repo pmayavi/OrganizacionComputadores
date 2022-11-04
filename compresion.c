@@ -71,7 +71,7 @@ void exchange(struct node *node, struct node *objective)
     objective->parent = temp;
     printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->right->char_element);
     objective->parent->left = objective;
-    printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->right->char_element);
+    printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->left->char_element);
 
     ParentValue(temp);
     ParentValue(node);
