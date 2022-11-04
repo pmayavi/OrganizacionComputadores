@@ -120,7 +120,7 @@ struct node *find(struct node *node, char c)
 void print_nodes(struct node *node)
 {
     // if (node->char_element)
-    printf("[%c, %d", node->char_element, node->uses);
+    printf("[%c, %d, %d", node->char_element, node->uses, node->data_element);
     if (node->right)
         printf(", R-%c", node->right->char_element);
     if (node->left)
