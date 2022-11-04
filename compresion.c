@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX 1024
+#define MAX 512
 
 struct node
 {
@@ -29,7 +29,7 @@ void display(struct node *root) // A function for the inroder traversal of the b
     if (root != NULL)
     {
         display(root->left);
-        printf("%d \n", root->char_element);
+        printf("%c \n", root->char_element);
         display(root->right);
     }
 }
@@ -58,7 +58,7 @@ int main()
     char letters[107];
     size_t let = 0;
     int num[107];
-    fgets(input, 2, stdin);
+    fgets(input, MAX, stdin);
     printf("boing1.1");
     int new;
     struct node *root = new_node(0, 0, NULL);
