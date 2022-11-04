@@ -144,6 +144,23 @@ int main()
         new = 1;
         for (size_t j = 0; j < strlen(letters); j++)
         {
+            if ((input[i] < 32 || input[i] > 127) && (input[i] < 160 || input[i] > 165))
+            {
+                switch (input[i])
+                {
+                case 130: // e
+                case 144: // E
+                case 181: // A
+                case 214: // I
+                case 224: // O
+                case 233: // U
+                    break;
+                default:
+                    printf("Simbolo encontrado genera error de compresion");
+                    exit(0);
+                    break;
+                }
+            }
             if (input[i] == letters[j])
             {
                 new = 0;
