@@ -95,7 +95,7 @@ int compare(struct node *node)
         do
         {
             temp = temp->parent;
-            if (temp->right->data_element != node->data_element && node->uses >= temp->right->uses)
+            if (node->uses > temp->right->uses)
                 ex = temp->right;
         } while (temp->parent);
         // printf("node:%d > temp:%d\n", node->uses, ex->right->uses);
@@ -164,7 +164,7 @@ int main()
             {
                 new = 0;
                 // aqui es repetido
-                temp = find_char(root, letters[j]);
+                temp = find(root, letters[j]);
                 temp->uses += 1;
                 temp->parent->uses += 1;
                 // print_nodes(root);
