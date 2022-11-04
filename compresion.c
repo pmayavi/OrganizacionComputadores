@@ -25,25 +25,25 @@ void display(struct node *root) // A function for the inroder traversal of the b
     if (root != NULL)
     {
         display(root->left);
-        printf("%d \n", root->data_element);
+        printf("%d \n", root->char_element);
         display(root->right);
     }
 }
 
-struct node *insert(struct node *node, int data_element) // Function to insert a new node
+void insert(struct node *father, struct node *node) // Function to insert a new node
 {
-
-    if (node == NULL)
-        return new_node(data_element); // Return a new node if the tree if empty
-    if (data_element < node->data_element)
+    if (father->char_element != 0)
+        return;
+    if (!father->left)
     {
-        node->left = insert(node->left, data_element);
+        father->left = new_node(node->uses, 0, father);
+        father->left->right = node;
     }
-    else if (data_element > node->data_element)
+    else
     {
-        node->right = insert(node->right, data_element);
+        recursion(father->left, node);
+        recursion(father->right, node);
     }
-    return node;
 }
 
 int main()
@@ -51,11 +51,11 @@ int main()
     char input[1024];
     char letters[107];
     size_t let = 0;
-    int use[107];
+    int num[107];
     gets(input);
     int new;
     struct node *root = NULL;
-    root = insert(root, 10);
+    root = new_node(0, 0, NULL);
     for (size_t i = 0; i < strlen(input); i++)
     {
         new = 1;
@@ -64,23 +64,15 @@ int main()
             if (input[i] == letters[j])
             {
                 new = 0;
-                use[j] += 1;
                 break;
             }
         }
         if (new)
         {
+            letters[let++] = input[i];
+            insert(root, input[i]);
         }
     }
-
-    struct node *root = NULL;
-    root = insert(root, 10);
-    insert(root, 20);
-    insert(root, 30);
-    insert(root, 40);
-    insert(root, 50);
-    insert(root, 60);
-    insert(root, 70);
 
     display(root); // Function to display the binary tree elements
 
