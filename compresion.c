@@ -88,6 +88,7 @@ int compare(struct node *node)
     {
         do
         {
+            printf("%d\n", temp->uses);
             temp = temp->parent;
             if (node->uses > temp->right->uses)
             {
@@ -143,7 +144,6 @@ int main()
                 new = 0;
                 // aqui es repetido
                 temp = find(root, letters[j]);
-                printf("%d\n", temp->uses);
                 temp->uses += 1;
                 temp->parent->uses += 1;
                 compare(temp);
