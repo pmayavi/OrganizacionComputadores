@@ -145,7 +145,7 @@ int main()
         {
             int ch = input[i];
             printf("%c", -159);
-            printf("%c", -164);
+            printf("%c", ch);
             if ((ch < 32 || ch > 127) && (ch > -159 || ch < -164))
             {
                 switch (ch)
