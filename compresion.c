@@ -56,10 +56,13 @@ int main()
 {
     fgets(input, MAX, stdin);
     printf("%s", input);
+    printf("boing0");
     char letters[107];
     size_t let = 0;
+    printf("boing1");
     int num[107];
     int new;
+    printf("boing1.1");
     struct node *root = new_node(0, 0, NULL);
     printf("boing2");
     for (size_t i = 0; i < strlen(input); i++)
