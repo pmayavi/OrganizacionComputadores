@@ -56,6 +56,8 @@ int main()
 {
     input[MAX] = 0;
     fgets(input, MAX, stdin);
+    input[3] = 0;
+    input[MAX] = 0;
     printf("%s", input);
     printf("boing0");
     char letters[107];
