@@ -64,7 +64,7 @@ void exchange(struct node *node, struct node *objective)
     printf("\nnode:%d\nobjective:%d\n", node->parent->data_element, objective->parent->data_element);
     struct node *temp = node->parent;
     node->parent = objective->parent;
-    objective->parent->left = node;
+    objective->parent->right = node;
 
     objective->parent = temp;
     temp->left = objective;
