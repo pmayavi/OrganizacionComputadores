@@ -95,9 +95,9 @@ int compare(struct node *node)
         do
         {
             temp = temp->parent;
-            if (node->data_element != temp->right->data_element && node->uses == temp->right->uses)
+            if (temp->right && node->data_element != temp->right->data_element && node->uses == temp->right->uses)
                 ex = temp->right;
-            else if (node->data_element != temp->left->data_element && node->uses == temp->left->uses)
+            else if (temp->left && node->data_element != temp->left->data_element && node->uses == temp->left->uses)
                 ex = temp->left;
         } while (temp->parent);
         // printf("node:%d > temp:%d\n", node->uses, ex->right->uses);
