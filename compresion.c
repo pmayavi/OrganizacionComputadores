@@ -18,6 +18,7 @@ void exchange(struct node *, struct node *);
 void ParentValue(struct node *);
 int compare(struct node *);
 struct node *find(struct node *, char c);
+void print_nodes(struct node *, char *, int);
 
 struct node *new_node(int uses, char char_element)
 {
@@ -47,6 +48,7 @@ void insert(struct node *parent, struct node *node) // Function to insert a new 
     {
         parent->left = new_node(node->uses, 0);
         parent->left->parent = parent;
+        ParentValue(parent);
         parent->right = node;
         node->parent = parent;
     }
@@ -110,6 +112,40 @@ struct node *find(struct node *node, char c)
     return find(node->right, c);
 }
 
+void print_nodes(struct node *node, char binary[], int position)
+{
+
+    if (node->char_element)
+    {
+        if (node->parent->left->char_element)
+        {
+            binary[position] = '1';
+            position++;
+        }
+        if (node->parent->right->char_element)
+        {
+            binary[position] = '0';
+            position++;
+        }
+        printf("[%c,%d,%s]\n", node->char_element, node->uses, binary);
+    }
+    else
+    {
+        if (node->parent->left->char_element)
+        {
+            binary[position] = '1';
+            position++;
+        }
+        if (node->parent->right->char_element)
+        {
+            binary[position] = '0';
+            position++;
+        }
+    }
+    print_nodes(node->left, binary, position);
+    print_nodes(node->right, binary, position);
+}
+
 int main()
 {
     fgets(input, MAX, stdin);
@@ -141,7 +177,8 @@ int main()
             insert(root, new_node(1, input[i]));
         }
     }
-    display(root); // Function to display the binary tree elements
+    char binary[10];
+    print_nodes(root, binary, 0); // Function to display the binary tree elements
 
     return 0;
 }
