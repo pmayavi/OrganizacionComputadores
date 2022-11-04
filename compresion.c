@@ -61,17 +61,12 @@ void insert(struct node *parent, struct node *node) // Function to insert a new 
 
 void exchange(struct node *node, struct node *objective)
 {
-    printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->right->char_element);
     struct node *temp = node->parent;
     node->parent = objective->parent;
-    printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->right->char_element);
     node->parent->right = node;
-    printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->parent->right->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->right->char_element);
 
     objective->parent = temp;
-    printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->parent->right->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->right->char_element);
     objective->parent->left = objective;
-    printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->parent->right->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->left->char_element);
 
     ParentValue(temp);
     ParentValue(node);
@@ -102,7 +97,7 @@ int compare(struct node *node)
             if (node->uses > temp->right->uses)
                 ex = temp;
         } while (temp->parent);
-        printf("node:%d > temp:%d\n", node->uses, ex->right->uses);
+        // printf("node:%d > temp:%d\n", node->uses, ex->right->uses);
         if (ex)
             exchange(node->parent, ex->right);
     }
@@ -125,14 +120,14 @@ struct node *find(struct node *node, char c)
 void print_nodes(struct node *node)
 {
     if (node->char_element)
-        printf("[%c, %d, %d", node->char_element, node->uses, node->data_element);
+        printf("[%c, %d, %d]\n", node->char_element, node->uses, node->data_element);
     // if (node->right)
     // printf(", R-%d", node->right->data_element);
     // if (node->left)
     // printf(", L-%d", node->left->data_element);
     // if (node->parent)
     // printf(", P-%d", node->parent->data_element);
-    printf("]\n");
+    // printf("]\n");
     if (node->right)
         print_nodes(node->right);
     if (node->left)
