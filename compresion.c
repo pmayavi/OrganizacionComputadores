@@ -126,6 +126,7 @@ int main()
                 new = 0;
                 // aqui es repetido
                 temp = find(root, letters[j]);
+                printf("%d\n", temp->uses);
                 temp->uses += 1;
                 compare(temp);
                 break;
