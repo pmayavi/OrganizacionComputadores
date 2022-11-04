@@ -82,7 +82,7 @@ void ParentValue(struct node *parent)
 
 int compare(struct node *node)
 {
-    struct node *temp = node;
+    struct node *temp = node->parent;
     struct node *ex = NULL;
     printf("%d-%d\n", temp->uses, node->parent->right->uses);
     if (node->uses > node->parent->right->uses)
