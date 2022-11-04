@@ -3,6 +3,7 @@
 #include <string.h>
 
 #define MAX 1024
+#define N 107
 char input[MAX];
 
 struct node
@@ -19,12 +20,12 @@ void ParentValue(struct node *);
 int compare(struct node *);
 struct node *find(struct node *, char c);
 void print_nodes(struct node *);
-int data = 0;
+int data = N;
 
 struct node *new_node(int uses, char char_element)
 {
     struct node *temp = (struct node *)malloc(sizeof(struct node)); // Allocating memory to the node
-    temp->data_element = data++;
+    temp->data_element = data--;
     temp->uses = uses;
     temp->char_element = char_element;
     temp->left = temp->right = temp->parent = NULL;
@@ -125,7 +126,7 @@ void print_nodes(struct node *node)
 int main()
 {
     fgets(input, MAX, stdin);
-    char letters[107];
+    char letters[N];
     size_t let = 0;
     int new;
     struct node *root = new_node(0, 0);
