@@ -153,6 +153,7 @@ int main()
                 temp->uses += 1;
                 ParentValue(temp->parent);
                 print_nodes(root);
+                printf("\n");
                 compare(temp);
                 break;
             }
