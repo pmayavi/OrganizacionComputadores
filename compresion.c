@@ -67,7 +67,7 @@ void exchange(struct node *node, struct node *objective)
 
     objective->parent = temp;
     objective->parent->left = objective;
-    return 0;
+    return;
     ParentValue(objective->parent);
     ParentValue(node);
 }
