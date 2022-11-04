@@ -149,12 +149,12 @@ int main()
             {
                 switch (input[i])
                 {
-                case 130: // e
-                case 144: // E
-                case 181: // A
-                case 214: // I
-                case 224: // O
-                case 233: // U
+                case -129: // e
+                case -143: // E
+                case -180: // A
+                case -213: // I
+                case -223: // O
+                case -232: // U
                     break;
                 default:
                     printf("Simbolo encontrado genera error de compresion");
