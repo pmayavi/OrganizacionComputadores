@@ -164,7 +164,7 @@ int main()
             {
                 new = 0;
                 // aqui es repetido
-                temp = find(root, letters[j]);
+                temp = find_char(root, letters[j]);
                 temp->uses += 1;
                 temp->parent->uses += 1;
                 // print_nodes(root);
