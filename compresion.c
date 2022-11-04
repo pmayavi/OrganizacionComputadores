@@ -54,10 +54,8 @@ void insert(struct node *father, struct node *node) // Function to insert a new 
 int main()
 {
     fgets(input, MAX, stdin);
-    printf("%s", input);
     char letters[107];
     size_t let = 0;
-    int num[107];
     int new;
     struct node *root = new_node(0, 0, NULL);
     for (size_t i = 0; i < strlen(input) - 1; i++)
