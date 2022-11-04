@@ -3,6 +3,7 @@
 #include <string.h>
 
 #define MAX 1024
+char input[MAX];
 
 struct node
 {
@@ -53,13 +54,11 @@ void insert(struct node *father, struct node *node) // Function to insert a new 
 
 int main()
 {
-    printf("boing1");
-    char input[MAX];
+    fgets(input, MAX, stdin);
+    printf("%s", input);
     char letters[107];
     size_t let = 0;
     int num[107];
-    fgets(input, 3, stdin);
-    printf("%s", input);
     int new;
     struct node *root = new_node(0, 0, NULL);
     printf("boing2");
