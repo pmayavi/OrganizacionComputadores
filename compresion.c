@@ -13,6 +13,12 @@ struct node
     struct node *left, *right, *parent;
 };
 
+void insert(struct node *, struct node *);
+void exchange(struct node *, struct node *);
+void ParentValue(struct node *);
+struct node *compareParents(struct node *, struct node *);
+int compare(struct node *);
+
 struct node *new_node(int uses, char char_element)
 {
     struct node *temp = (struct node *)malloc(sizeof(struct node)); // Allocating memory to the node
@@ -33,7 +39,6 @@ void display(struct node *root) // A function for the inroder traversal of the b
     }
 }
 
-void insert(struct node *, struct node *);
 void insert(struct node *parent, struct node *node) // Function to insert a new node
 {
     if (parent->char_element != 0)
@@ -52,7 +57,6 @@ void insert(struct node *parent, struct node *node) // Function to insert a new 
     }
 }
 
-void exchange(struct node *, struct node *);
 void exchange(struct node *node, struct node *objective)
 {
     struct node *temp = node->parent;
@@ -62,7 +66,6 @@ void exchange(struct node *node, struct node *objective)
     objective->parent->left = objective;
 }
 
-void ParentValue(struct node *);
 void ParentValue(struct node *parent)
 {
     int Lchild = parent->left->uses;
@@ -70,7 +73,15 @@ void ParentValue(struct node *parent)
     parent->uses = Lchild + Rchild;
 }
 
-int compare(struct node *);
+struct node *compareParents(struct node *node, struct node *parent)
+{
+    if (node->uses > parent->parent->right->uses)
+    {
+        return parent;
+    }
+    return NULL;
+}
+
 int compare(struct node *node)
 {
     int nodeValue = node->uses;
@@ -96,16 +107,6 @@ int compare(struct node *node)
             exchange(node->parent, ex);
         }
     }
-}
-
-struct node *compareParents(struct node *, struct node *);
-struct node *compareParents(struct node *node, struct node *parent)
-{
-    if (node->uses > parent->parent->right->uses)
-    {
-        return parent;
-    }
-    return NULL;
 }
 
 int main()
