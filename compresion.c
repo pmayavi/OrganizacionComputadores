@@ -120,14 +120,14 @@ struct node *find(struct node *node, char c)
 void print_nodes(struct node *node)
 {
     // if (node->char_element)
-    printf("[%c, %d, %d]\n", node->char_element, node->uses, node->data_element);
-    // if (node->right)
-    // printf(", R-%d", node->right->data_element);
-    // if (node->left)
-    // printf(", L-%d", node->left->data_element);
-    // if (node->parent)
-    // printf(", P-%d", node->parent->data_element);
-    // printf("]\n");
+    printf("[%c, %d, %d", node->char_element, node->uses, node->data_element);
+    if (node->right)
+        printf(", R-%d", node->right->data_element);
+    if (node->left)
+        printf(", L-%d", node->left->data_element);
+    if (node->parent)
+        printf(", P-%d", node->parent->data_element);
+    printf("]\n");
     if (node->right)
         print_nodes(node->right);
     if (node->left)
