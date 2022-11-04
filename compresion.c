@@ -16,7 +16,6 @@ struct node
 void insert(struct node *, struct node *);
 void exchange(struct node *, struct node *);
 void ParentValue(struct node *);
-struct node *compareParents(struct node *, struct node *);
 int compare(struct node *);
 
 struct node *new_node(int uses, char char_element)
@@ -73,31 +72,17 @@ void ParentValue(struct node *parent)
     parent->uses = Lchild + Rchild;
 }
 
-struct node *compareParents(struct node *node, struct node *parent)
-{
-    if (node->uses > parent->parent->right->uses)
-    {
-        return parent;
-    }
-    return NULL;
-}
-
 int compare(struct node *node)
 {
     int nodeValue = node->uses;
-    int ciclo = 1;
-    struct node *temp = NULL;
+    struct node *temp = node;
     struct node *ex = NULL;
-    if (node->parent->left->uses == node->parent->right->uses)
+    if (node->uses > node->parent->right->uses)
     {
-        // cuando son iguales no pasa nada
-    }
-    if (node->uses > node->parent->left->uses)
-    {
-        while (ciclo == 1)
+        while (!temp || temp->parent)
         {
-            temp = compareParents(node, node->parent); // metodo de comparar con el hermano del padre
-            if (temp)
+            temp = temp->parent;
+            if (node->uses > temp->right->uses)
             {
                 ex = temp;
             }
