@@ -18,7 +18,7 @@ void exchange(struct node *, struct node *);
 void ParentValue(struct node *);
 int compare(struct node *);
 struct node *find(struct node *, char c);
-void print_nodes(struct node *, char *, int);
+void print_nodes(struct node *);
 
 struct node *new_node(int uses, char char_element)
 {
@@ -112,17 +112,16 @@ struct node *find(struct node *node, char c)
     return find(node->right, c);
 }
 
-void print_nodes(struct node *node, char binary[], int position)
+void print_nodes(struct node *node)
 {
-
     if (node->char_element)
     {
-        printf("[%c,%d,%s]\n", node->char_element, node->uses, binary);
+        printf("[%c,%d,bin]\n", node->char_element, node->uses);
     }
     if (node->left)
-        print_nodes(node->left, binary, position);
+        print_nodes(node->left);
     if (node->right)
-        print_nodes(node->right, binary, position);
+        print_nodes(node->right);
 }
 
 int main()
@@ -157,7 +156,7 @@ int main()
         }
     }
     char binary[20];
-    print_nodes(root, binary, 0); // Function to display the binary tree elements
+    print_nodes(root); // Function to display the binary tree elements
 
     return 0;
 }
