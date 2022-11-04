@@ -93,10 +93,6 @@ int compare(struct node *node)
             if (node->uses > temp->right->uses)
                 ex = temp;
         } while (temp->parent);
-        if (ex)
-        {
-            exchange(node->parent, ex);
-        }
     }
 }
 
