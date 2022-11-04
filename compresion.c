@@ -20,7 +20,7 @@ void ParentValue(struct node *);
 int compare(struct node *);
 struct node *find(struct node *, char c);
 void print_nodes(struct node *);
-int data = N;
+int data = (2 * N) - 1;
 
 struct node *new_node(int uses, char char_element)
 {
@@ -115,15 +115,15 @@ struct node *find(struct node *node, char c)
 
 void print_nodes(struct node *node)
 {
-    // if (node->char_element)
-    printf("[%c, %d, %d", node->char_element, node->uses, node->data_element);
-    if (node->right)
-        printf(", R-%d", node->right->data_element);
-    if (node->left)
-        printf(", L-%d", node->left->data_element);
-    if (node->parent)
-        printf(", P-%d", node->parent->data_element);
-    printf("]\n");
+    if (node->char_element)
+        printf("[%c, %d, %d]\n", node->char_element, node->uses, node->data_element);
+    // if (node->right)
+    //     printf(", R-%d", node->right->data_element);
+    // if (node->left)
+    //     printf(", L-%d", node->left->data_element);
+    // if (node->parent)
+    //     printf(", P-%d", node->parent->data_element);
+    // printf("]\n");
     if (node->right)
         print_nodes(node->right);
     if (node->left)
