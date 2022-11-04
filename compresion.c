@@ -17,15 +17,10 @@ struct node
 void insert(struct node *, struct node *);
 void exchange(struct node *, struct node *);
 void ParentValue(struct node *);
-struct node *compare(struct node *, struct node *);
-struct node *find_char(struct node *, char);
-struct node *find_data(struct node *, int);
+int compare(struct node *);
+struct node *find(struct node *, char c);
 void print_nodes(struct node *);
-
-int data = (2 * N) - 1;
-struct node *root;
-int datas[N];
-int weights[N];
+int data = N;
 
 struct node *new_node(int uses, char char_element)
 {
@@ -66,15 +61,17 @@ void insert(struct node *parent, struct node *node) // Function to insert a new 
 
 void exchange(struct node *node, struct node *objective)
 {
+    printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->right->char_element);
     struct node *temp = node->parent;
-    int data1 = node->parent->data_element;
     node->parent = objective->parent;
-    node->data_element = objective->data_element;
-    node->parent->right = node; /// SUS
+    printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->right->char_element);
+    node->parent->right = node;
+    printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->parent->right->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->right->char_element);
 
     objective->parent = temp;
-    objective->data_element = data1;
+    printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->parent->right->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->right->char_element);
     objective->parent->left = objective;
+    printf("\nnode:%d %c %d\nobjective:%d %c\n", node->data_element, node->parent->right->right->char_element, node->parent->data_element, objective->parent->data_element, objective->parent->left->char_element);
 
     ParentValue(temp);
     ParentValue(node);
@@ -93,36 +90,25 @@ void ParentValue(struct node *node)
         ParentValue(node->parent);
 }
 
-struct node *compare(struct node *node, struct node *parent)
+int compare(struct node *node)
 {
-    struct node *rig = NULL;
-    struct node *lef = NULL;
-    if (parent->right)
-        rig = compare(node, parent->right);
-    if (parent->left)
-        lef = compare(node, parent->left);
-
-    if (!rig)
-        rig = parent;
-    if (!lef)
-        lef = parent;
-    if (rig->data_element > lef->data_element)
+    struct node *temp = node->parent;
+    struct node *ex = NULL;
+    if (temp->parent && temp->parent->right->data_element != temp->data_element)
     {
-        if (rig->uses == node->uses)
-            return rig;
-        else
-            return lef;
-    }
-    else
-    {
-        if (lef->uses == node->uses)
-            return rig;
-        else
-            return lef;
+        do
+        {
+            temp = temp->parent;
+            if (node->uses > temp->right->uses)
+                ex = temp;
+        } while (temp->parent);
+        printf("node:%d > temp:%d\n", node->uses, ex->right->uses);
+        if (ex)
+            exchange(node->parent, ex->right);
     }
 }
 
-struct node *find_char(struct node *node, char c)
+struct node *find(struct node *node, char c)
 {
     if (!node)
         return NULL;
@@ -130,22 +116,10 @@ struct node *find_char(struct node *node, char c)
         return node;
     if (node->char_element != 0)
         return NULL;
-    struct node *f = find_char(node->left, c);
+    struct node *f = find(node->left, c);
     if (f)
         return f;
-    return find_char(node->right, c);
-}
-
-struct node *find_data(struct node *node, int d)
-{
-    if (!node)
-        return NULL;
-    if (node->data_element == d)
-        return node;
-    struct node *f = find_data(node->left, d);
-    if (f)
-        return f;
-    return find_data(node->right, d);
+    return find(node->right, c);
 }
 
 void print_nodes(struct node *node)
@@ -171,7 +145,7 @@ int main()
     char letters[N];
     size_t let = 0;
     int new;
-    root = new_node(0, 0);
+    struct node *root = new_node(0, 0);
     struct node *temp;
     for (size_t i = 0; i < strlen(input) - 1; i++)
     {
@@ -182,12 +156,12 @@ int main()
             {
                 new = 0;
                 // aqui es repetido
-                temp = find_char(root, letters[j]);
+                temp = find(root, letters[j]);
                 temp->uses += 1;
-                temp->parent->uses += 1;
-                // print_nodes(root);
+                ParentValue(temp->parent);
+                print_nodes(root);
                 printf("\n");
-                exchange(temp, compare(temp, root));
+                compare(temp);
                 break;
             }
         }
