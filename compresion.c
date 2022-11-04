@@ -3,7 +3,7 @@
 #include <string.h>
 struct node
 {
-    int data_element;
+    int data_element;//el valor de la izquierda del pdf
     int uses;
     char char_element;
     struct node *left, *right, *father;
@@ -44,6 +44,48 @@ struct node *insert(struct node *node, int data_element) // Function to insert a
         node->right = insert(node->right, data_element);
     }
     return node;
+}
+
+return void ParentValue (struct node parent){
+    int Lchild= parent->left->uses;
+    int Rchlid= parent->right->uses;
+    parent->uses=Lchild+Rchild;
+}
+
+int compare (struct node node) {
+    nodeValue = node->uses;
+    int ciclo = 1;
+    temp=NULL;
+    exchange=NULL;
+    if (node->parent->left->uses== node->parent->right->uses){
+        //cuando son iguales no pasa nada
+    }
+    if (node->uses > node->parent->left){
+        while (ciclo == 1){
+            temp= compareParents(node, node->parent);//metodo de comparar con el hermano del padre
+            if (temp){
+                exchange=temp;
+            }
+        }
+        if(exchange){
+            exchange(node->parent,exchange);
+        }
+    }
+}
+
+int compareParents (struct node node, struct node parent){
+    if (node->value > parent->parent->right){
+        return parent;
+    }
+    return NULL;
+}
+
+void exchange (struct node,struct objective){
+    temp=node->parent
+    node->parent=objective->parent;
+    objective->parent=temp;
+    node->parent->right=node;
+    objective->parent->left=objective;
 }
 
 int main()
