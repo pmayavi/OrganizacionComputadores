@@ -94,7 +94,7 @@ int compare(struct node *node)
 {
     struct node *temp = node->parent;
     struct node *ex = NULL;
-    if (temp->parent)
+    if (temp->parent->parent)
     {
         do
         {
@@ -160,8 +160,6 @@ int main()
                 print_nodes(root);
                 printf("\n");
                 compare(temp);
-                if (temp->uses == 3)
-                    return 0;
                 break;
             }
         }
