@@ -63,11 +63,12 @@ void exchange(struct node *node, struct node *objective)
 {
     struct node *temp = node->parent;
     node->parent = objective->parent;
-    node->parent->uses = node->parent->uses - node->uses;
+    objective->parent->left = node;
+
     objective->parent = temp;
-    node->parent->right = node;
     objective->parent->left = objective;
-    node->parent->uses = node->parent->left->uses + node->parent->right->uses;
+
+    node->uses = node->left->uses + node->right->uses;
     objective->parent->uses = objective->parent->left->uses + objective->parent->right->uses;
 }
 
@@ -93,6 +94,10 @@ int compare(struct node *node)
             if (node->uses > temp->right->uses)
                 ex = temp;
         } while (temp->parent);
+        if (ex)
+        {
+            exchange(node->parent, ex);
+        }
     }
 }
 
