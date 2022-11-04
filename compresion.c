@@ -17,11 +17,15 @@ struct node
 void insert(struct node *, struct node *);
 void exchange(struct node *, struct node *);
 void ParentValue(struct node *);
-int compare(struct node *);
+struct node *compare(struct node *, struct node *);
 struct node *find_char(struct node *, char);
 struct node *find_data(struct node *, int);
 void print_nodes(struct node *);
-int data = N - 1;
+
+int data = (2 * N) - 1;
+struct node *root;
+int datas[N];
+int weights[N];
 
 struct node *new_node(int uses, char char_element)
 {
@@ -63,10 +67,13 @@ void insert(struct node *parent, struct node *node) // Function to insert a new 
 void exchange(struct node *node, struct node *objective)
 {
     struct node *temp = node->parent;
+    int data1 = node->parent->data_element;
     node->parent = objective->parent;
-    node->parent->right = node;
+    node->data_element = objective->data_element;
+    node->parent->right = node; /// SUS
 
     objective->parent = temp;
+    objective->data_element = data1;
     objective->parent->left = objective;
 
     ParentValue(temp);
@@ -86,23 +93,32 @@ void ParentValue(struct node *node)
         ParentValue(node->parent);
 }
 
-int compare(struct node *node)
+struct node *compare(struct node *node, struct node *parent)
 {
-    struct node *temp = node->parent;
-    struct node *ex = NULL;
-    if (temp->parent && temp->parent->right->data_element != temp->data_element)
+    struct node *rig = NULL;
+    struct node *lef = NULL;
+    if (parent->right)
+        rig = compare(node, parent->right);
+    if (parent->left)
+        lef = compare(node, parent->left);
+
+    if (!rig)
+        rig = parent;
+    if (!lef)
+        lef = parent;
+    if (rig->data_element > lef->data_element)
     {
-        do
-        {
-            temp = temp->parent;
-            if (temp->right && node->data_element != temp->right->data_element && node->uses == temp->right->uses)
-                ex = temp->right;
-            else if (temp->left && node->data_element != temp->left->data_element && node->uses == temp->left->uses)
-                ex = temp->left;
-        } while (temp->parent);
-        // printf("node:%d > temp:%d\n", node->uses, ex->right->uses);
-        if (ex)
-            exchange(node->parent, ex);
+        if (rig->uses == node->uses)
+            return rig;
+        else
+            return lef;
+    }
+    else
+    {
+        if (lef->uses == node->uses)
+            return rig;
+        else
+            return lef;
     }
 }
 
@@ -155,7 +171,7 @@ int main()
     char letters[N];
     size_t let = 0;
     int new;
-    struct node *root = new_node(0, 0);
+    root = new_node(0, 0);
     struct node *temp;
     for (size_t i = 0; i < strlen(input) - 1; i++)
     {
@@ -171,7 +187,7 @@ int main()
                 temp->parent->uses += 1;
                 // print_nodes(root);
                 printf("\n");
-                compare(temp);
+                exchange(temp, compare(temp, root));
                 break;
             }
         }
