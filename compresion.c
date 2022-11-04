@@ -157,11 +157,11 @@ int main()
                 temp = find(root, letters[j]);
                 temp->uses += 1;
                 ParentValue(temp->parent);
-                if (temp->uses == 3)
-                    return 0;
                 print_nodes(root);
                 printf("\n");
                 compare(temp);
+                if (temp->uses == 3)
+                    return 0;
                 break;
             }
         }
