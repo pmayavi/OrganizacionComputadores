@@ -18,7 +18,7 @@ void exchange(struct node *, struct node *);
 void ParentValue(struct node *);
 int compare(struct node *);
 struct node *find(struct node *, char c);
-void print_nodes(struct node *);
+void print_nodes(struct node *, char *, int);
 
 struct node *new_node(int uses, char char_element)
 {
@@ -48,7 +48,6 @@ void insert(struct node *parent, struct node *node) // Function to insert a new 
     {
         parent->left = new_node(node->uses, 0);
         parent->left->parent = parent;
-        ParentValue(parent);
         parent->right = node;
         node->parent = parent;
     }
@@ -112,16 +111,40 @@ struct node *find(struct node *node, char c)
     return find(node->right, c);
 }
 
-void print_nodes(struct node *node)
+void print_nodes(struct node *node, char binary[], int position)
 {
+
     if (node->char_element)
     {
-        printf("[%c,%d,bin]\n", node->char_element, node->uses);
+        if (node->parent->left->char_element)
+        {
+            binary[position] = '1';
+            position++;
+        }
+        if (node->parent->right->char_element)
+        {
+            binary[position] = '0';
+            position++;
+        }
+        printf("[%c,%d,%s]\n", node->char_element, node->uses, binary);
+    }
+    else
+    {
+        if (node->parent->left->char_element)
+        {
+            binary[position] = '1';
+            position++;
+        }
+        if (node->parent->right->char_element)
+        {
+            binary[position] = '0';
+            position++;
+        }
     }
     if (node->left)
-        print_nodes(node->left);
+        print_nodes(node->left, binary, position);
     if (node->right)
-        print_nodes(node->right);
+        print_nodes(node->right, binary, position);
 }
 
 int main()
@@ -144,7 +167,6 @@ int main()
                 temp = find(root, letters[j]);
                 printf("%d\n", temp->uses);
                 temp->uses += 1;
-                ParentValue(temp->parent);
                 compare(temp);
                 break;
             }
@@ -155,8 +177,8 @@ int main()
             insert(root, new_node(1, input[i]));
         }
     }
-    return 0;
-    print_nodes(root); // Function to display the binary tree elements
+    char binary[20];
+    print_nodes(root, binary, 0); // Function to display the binary tree elements
 
     return 0;
 }
