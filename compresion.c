@@ -144,6 +144,7 @@ int main()
         for (size_t j = 0; j < strlen(letters); j++)
         {
             int ch = input[i];
+            printf("%c %d", ch, ch);
             if ((ch < 32 || ch > 127) && (ch < 160 || ch > 165))
             {
                 switch (ch)
