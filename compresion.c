@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX 512
+#define MAX 4
 
 struct node
 {
