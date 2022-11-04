@@ -126,11 +126,13 @@ void print_nodes(struct node *node)
 {
     // if (node->char_element)
     printf("[%c, %d, %d]\n", node->char_element, node->uses, node->data_element);
-    // if (node->right)
-    //     printf(", R-%c", node->right->char_element);
-    // if (node->left)
-    //     printf(", L-%c", node->left->char_element);
-    // printf("]\n");
+    if (node->right)
+        printf(", R-%c", node->right->data_element);
+    if (node->left)
+        printf(", L-%c", node->left->data_element);
+    if (node->parent)
+        printf(", P-%c", node->parent->data_element);
+    printf("]\n");
     if (node->right)
         print_nodes(node->right);
     if (node->left)
