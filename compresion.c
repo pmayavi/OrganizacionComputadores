@@ -65,6 +65,7 @@ int main()
         {
             if (input[i] == letters[j])
             {
+                printf("%c-%c\n", input[i], letters[j]);
                 new = 0;
                 break;
             }
