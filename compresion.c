@@ -61,38 +61,12 @@ int main()
         perror("Error opening file");
         return (-1);
     }
-    fgets(input, MAX, fp);
-    printf("%s", input);
-    printf("boing0");
-    char letters[107];
-    size_t let = 0;
-    printf("boing1");
-    int num[107];
-    int new;
-    printf("boing1.1");
-    struct node *root = new_node(0, 0, NULL);
-    printf("boing2");
-    for (size_t i = 0; i < strlen(input); i++)
+    if (fgets(input, MAX, fp) != NULL)
     {
-        new = 1;
-        printf("boing3");
-        for (size_t j = 0; j < strlen(letters); j++)
-        {
-            if (input[i] == letters[j])
-            {
-                new = 0;
-                break;
-            }
-        }
-        printf("boing4");
-        if (new)
-        {
-            letters[let++] = input[i];
-            insert(root, new_node(1, input[i], root));
-        }
+        /* writing content to stdout */
+        puts(input);
     }
-    printf("boing5");
-    display(root); // Function to display the binary tree elements
+    fclose(fp);
 
-    return 0;
+    return (0);
 }
