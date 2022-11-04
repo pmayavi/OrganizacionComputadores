@@ -54,11 +54,11 @@ void insert(struct node *father, struct node *node) // Function to insert a new 
 int main()
 {
     printf("boing1");
-    char input[MAX] = {0};
+    char input[MAX];
     char letters[107];
     size_t let = 0;
     int num[107];
-    fgets(input, 2, stdin);
+    fgets(input, 3, stdin);
     printf("%s", input);
     int new;
     struct node *root = new_node(0, 0, NULL);
