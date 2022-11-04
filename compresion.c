@@ -18,9 +18,10 @@ void insert(struct node *, struct node *);
 void exchange(struct node *, struct node *);
 void ParentValue(struct node *);
 int compare(struct node *);
-struct node *find(struct node *, char c);
+struct node *find_char(struct node *, char);
+struct node *find_data(struct node *, int);
 void print_nodes(struct node *);
-int data = N;
+int data = N - 1;
 
 struct node *new_node(int uses, char char_element)
 {
@@ -94,8 +95,10 @@ int compare(struct node *node)
         do
         {
             temp = temp->parent;
-            if (node->uses > temp->right->uses)
+            if (temp->right->data_element != node->data_element && node->uses >= temp->right->uses)
                 ex = temp->right;
+            else if (temp->left->data_element != node->data_element && node->uses >= temp->left->uses)
+                ex = temp->left;
         } while (temp->parent);
         // printf("node:%d > temp:%d\n", node->uses, ex->right->uses);
         if (ex)
@@ -103,7 +106,7 @@ int compare(struct node *node)
     }
 }
 
-struct node *find(struct node *node, char c)
+struct node *find_char(struct node *node, char c)
 {
     if (!node)
         return NULL;
@@ -111,10 +114,22 @@ struct node *find(struct node *node, char c)
         return node;
     if (node->char_element != 0)
         return NULL;
-    struct node *f = find(node->left, c);
+    struct node *f = find_char(node->left, c);
     if (f)
         return f;
-    return find(node->right, c);
+    return find_char(node->right, c);
+}
+
+struct node *find_data(struct node *node, int d)
+{
+    if (!node)
+        return NULL;
+    if (node->data_element == d)
+        return node;
+    struct node *f = find_data(node->left, d);
+    if (f)
+        return f;
+    return find_data(node->right, d);
 }
 
 void print_nodes(struct node *node)
@@ -153,7 +168,7 @@ int main()
                 // aqui es repetido
                 temp = find(root, letters[j]);
                 temp->uses += 1;
-                ParentValue(temp->parent);
+                temp->parent->uses += 1;
                 // print_nodes(root);
                 printf("\n");
                 compare(temp);
