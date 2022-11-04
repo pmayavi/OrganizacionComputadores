@@ -63,9 +63,9 @@ int main()
         new = 1;
         for (size_t j = 0; j < strlen(letters) - 1; j++)
         {
+            printf("%c-%c\n", input[i], letters[j]);
             if (input[i] == letters[j])
             {
-                printf("%c-%c\n", input[i], letters[j]);
                 new = 0;
                 break;
             }
