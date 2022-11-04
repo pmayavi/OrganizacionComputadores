@@ -50,6 +50,7 @@ void insert(struct node *father, struct node *node) // Function to insert a new 
 
 int main()
 {
+    printf("boing1");
     char input[MAX];
     char letters[107];
     size_t let = 0;
@@ -58,9 +59,11 @@ int main()
     int new;
     struct node *root = NULL;
     root = new_node(0, 0, NULL);
+    printf("boing2");
     for (size_t i = 0; i < strlen(input); i++)
     {
         new = 1;
+        printf("boing3");
         for (size_t j = 0; j < strlen(letters); j++)
         {
             if (input[i] == letters[j])
@@ -69,13 +72,14 @@ int main()
                 break;
             }
         }
+        printf("boing4");
         if (new)
         {
             letters[let++] = input[i];
             insert(root, new_node(1, input[i], root));
         }
     }
-
+    printf("boing5");
     display(root); // Function to display the binary tree elements
 
     return 0;
