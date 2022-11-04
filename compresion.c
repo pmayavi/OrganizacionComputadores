@@ -32,15 +32,6 @@ struct node *new_node(int uses, char char_element)
     return temp;
 }
 
-void display(struct node *root) // A function for the inroder traversal of the binary tree
-{
-    if (root != NULL)
-    {
-        display(root->left);
-        display(root->right);
-    }
-}
-
 void insert(struct node *parent, struct node *node) // Function to insert a new node
 {
     if (parent->char_element != 0)
@@ -102,7 +93,7 @@ int compare(struct node *node)
             if (node->uses > temp->right->uses)
                 ex = temp;
         } while (temp->parent);
-        printf("node:%d > temp:%d\n", node->uses, ex->right->uses);
+        // printf("node:%d > temp:%d\n", node->uses, ex->right->uses);
         if (ex)
             exchange(node->parent, ex->right);
     }
@@ -158,9 +149,10 @@ int main()
                 // aqui es repetido
                 temp = find(root, letters[j]);
                 temp->uses += 1;
-                ParentValue(temp->parent);
-                print_nodes(root);
-                printf("\n");
+                temp->parent->uses += 1;
+                // ParentValue(temp->parent);
+                // print_nodes(root);
+                // printf("\n");
                 compare(temp);
                 break;
             }
