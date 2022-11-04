@@ -12,6 +12,7 @@ struct node
 
 struct node *new_node(int uses, char char_element, struct node *father)
 {
+    printf("boing1.2");
     struct node *temp = (struct node *)malloc(sizeof(struct node)); // Allocating memory to the node
     temp->data_element = 1;
     temp->uses = uses;
@@ -56,9 +57,9 @@ int main()
     size_t let = 0;
     int num[107];
     fgets(input, MAX, stdin);
+    printf("boing1.1");
     int new;
-    struct node *root = NULL;
-    root = new_node(0, 0, NULL);
+    struct node *root = new_node(0, 0, NULL);
     printf("boing2");
     for (size_t i = 0; i < strlen(input); i++)
     {
