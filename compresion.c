@@ -54,6 +54,7 @@ void insert(struct node *father, struct node *node) // Function to insert a new 
 
 int main()
 {
+    input[MAX] = 0;
     fgets(input, MAX, stdin);
     printf("%s", input);
     printf("boing0");
