@@ -3,7 +3,7 @@
 #include <string.h>
 
 #define MAX 1024
-char input[MAX];
+
 struct node
 {
     int data_element;
@@ -54,6 +54,7 @@ void insert(struct node *father, struct node *node) // Function to insert a new 
 int main()
 {
     printf("boing1");
+    char input[MAX + 1] = {0};
     char letters[107];
     size_t let = 0;
     int num[107];
