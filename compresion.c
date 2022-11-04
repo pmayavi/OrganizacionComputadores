@@ -17,6 +17,7 @@ void insert(struct node *, struct node *);
 void exchange(struct node *, struct node *);
 void ParentValue(struct node *);
 int compare(struct node *);
+struct node *find(struct node *, char c);
 
 struct node *new_node(int uses, char char_element)
 {
@@ -74,7 +75,6 @@ void ParentValue(struct node *parent)
 
 int compare(struct node *node)
 {
-    return 0;
     struct node *temp = node;
     struct node *ex = NULL;
     if (node->uses > node->parent->right->uses)
@@ -94,11 +94,24 @@ int compare(struct node *node)
     }
 }
 
+struct node *find(struct node *node, char c)
+{
+    if (!node)
+        return NULL;
+    if (node->char_element == c)
+        return node;
+    if (node->char_element != 0)
+        return NULL;
+    struct node *f = find(node->left, c);
+    if (f)
+        return f;
+    return find(node->right, c);
+}
+
 int main()
 {
     fgets(input, MAX, stdin);
     char letters[107];
-    struct node *nodes[107];
     size_t let = 0;
     int new;
     struct node *root = new_node(0, 0);
@@ -111,16 +124,14 @@ int main()
             {
                 new = 0;
                 // aqui es repetido
-                nodes[i]->uses += 1;
-                compare(nodes[i]);
+                compare(find(root, letters[j]));
                 break;
             }
         }
         if (new) // Nuevo character, nuevo nodo
         {
             letters[let++] = input[i];
-            nodes[i] = new_node(1, input[i]);
-            insert(root, nodes[i]);
+            insert(root, new_node(1, input[i]));
         }
     }
     display(root); // Function to display the binary tree elements
