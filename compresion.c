@@ -155,7 +155,7 @@ int main()
             insert(root, new_node(1, input[i]));
         }
     }
-    char binary[20];
+    return 0;
     print_nodes(root); // Function to display the binary tree elements
 
     return 0;
