@@ -39,10 +39,10 @@ void insert(struct node *father, struct node *node) // Function to insert a new 
 {
     if (father->char_element != 0)
         return;
-    if (!father->left)
+    if (!father->right)
     {
         father->left = new_node(node->uses, 0, father);
-        father->left->right = node;
+        father->right = node;
     }
     else
     {
