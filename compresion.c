@@ -84,11 +84,11 @@ int compare(struct node *node)
 {
     struct node *temp = node;
     struct node *ex = NULL;
+    printf("%d-%d\n", temp->uses, node->parent->right->uses);
     if (node->uses > node->parent->right->uses)
     {
         do
         {
-            printf("%d\n", temp->uses);
             temp = temp->parent;
             if (node->uses > temp->right->uses)
             {
