@@ -47,10 +47,10 @@ void insert(struct node *parent, struct node *node) // Function to insert a new 
         return;
     if (!parent->right)
     {
-        parent->left = new_node(node->uses, 0);
-        parent->left->parent = parent;
         parent->right = node;
         node->parent = parent;
+        parent->left = new_node(0, 0);
+        parent->left->parent = parent;
     }
     else
     {
