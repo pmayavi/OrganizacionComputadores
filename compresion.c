@@ -40,7 +40,7 @@ void insert(struct node *parent, struct node *node) // Function to insert a new 
         return;
     if (!parent->right)
     {
-        parent->left = new_node(node->uses, 0, parent);
+        parent->left = new_node(node->uses, 0);
         parent->left->parent = parent;
         parent->right = node;
         node->parent = parent;
@@ -52,6 +52,7 @@ void insert(struct node *parent, struct node *node) // Function to insert a new 
     }
 }
 
+void exchange(struct node *, struct node *);
 void exchange(struct node *node, struct node *objective)
 {
     struct node *temp = node->parent;
@@ -61,6 +62,7 @@ void exchange(struct node *node, struct node *objective)
     objective->parent->left = objective;
 }
 
+void ParentValue(struct node *);
 void ParentValue(struct node *parent)
 {
     int Lchild = parent->left->uses;
@@ -68,6 +70,7 @@ void ParentValue(struct node *parent)
     parent->uses = Lchild + Rchild;
 }
 
+int compare(struct node *);
 int compare(struct node *node)
 {
     int nodeValue = node->uses;
@@ -78,7 +81,7 @@ int compare(struct node *node)
     {
         // cuando son iguales no pasa nada
     }
-    if (node->uses > node->parent->left)
+    if (node->uses > node->parent->left->uses)
     {
         while (ciclo == 1)
         {
@@ -95,9 +98,10 @@ int compare(struct node *node)
     }
 }
 
-int compareParents(struct node *node, struct node *parent)
+struct node *compareParents(struct node *, struct node *);
+struct node *compareParents(struct node *node, struct node *parent)
 {
-    if (node->uses > parent->parent->right)
+    if (node->uses > parent->parent->right->uses)
     {
         return parent;
     }
@@ -111,7 +115,7 @@ int main()
     struct node *nodes[107];
     size_t let = 0;
     int new;
-    struct node *root = new_node(0, 0, NULL);
+    struct node *root = new_node(0, 0);
     for (size_t i = 0; i < strlen(input) - 1; i++)
     {
         new = 1;
