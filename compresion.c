@@ -147,20 +147,8 @@ int main()
             printf("%c", input[i]);
             if ((input[i] < 32 || input[i] > 127) && (input[i] > -159 || input[i] < -164))
             {
-                switch (input[i])
-                {
-                case -129: // e
-                case -143: // E
-                case -180: // A
-                case -213: // I
-                case -223: // O
-                case -232: // U
-                    break;
-                default:
-                    printf("Simbolo encontrado genera error de compresion");
-                    exit(0);
-                    break;
-                }
+                printf("Simbolo encontrado genera error de compresion");
+                exit(0);
             }
             if (input[i] == letters[j])
             {
