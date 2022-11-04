@@ -54,7 +54,13 @@ void insert(struct node *father, struct node *node) // Function to insert a new 
 
 int main()
 {
-    FILE *fp = fopen("Hola.txt", "r");
+    FILE *fp;
+    fp = fopen("Hola.txt", "r");
+    if (fp == NULL)
+    {
+        perror("Error opening file");
+        return (-1);
+    }
     fgets(input, MAX, fp);
     printf("%s", input);
     printf("boing0");
