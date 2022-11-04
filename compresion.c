@@ -46,10 +46,33 @@ struct node *insert(struct node *node, int data_element) // Function to insert a
     return node;
 }
 
+<<<<<<< Updated upstream
 return void ParentValue (struct node parent){
     int Lchild= parent->left->uses;
     int Rchlid= parent->right->uses;
     parent->uses=Lchild+Rchild;
+=======
+void exchange(struct node *node, struct node *objective)
+{ 
+    struct node *temp = node->parent;
+    node->parent = objective->parent;
+    node->parent->uses=node->parent->uses - node->uses;
+    objective->parent->uses = objective->parent->uses - objective->uses;
+    objective->parent = temp;
+    node->parent->right = node;
+    objective->parent->left = objective;
+    node->parent->uses=node->parent->uses + node->uses;
+    objective->parent->uses = objective->parent->uses + objective->uses;
+}
+
+void ParentValue(struct node *parent)
+{
+    int Lchild = 0;
+    if (parent->left)
+        Lchild = parent->left->uses;
+    int Rchild = parent->right->uses;
+    parent->uses = Lchild + Rchild;
+>>>>>>> Stashed changes
 }
 
 int compare (struct node node) {
