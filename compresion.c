@@ -156,6 +156,8 @@ int main()
                 // aqui es repetido
                 temp = find(root, letters[j]);
                 temp->uses += 1;
+                if (temp->uses == 3)
+                    return 0;
                 ParentValue(temp->parent);
                 print_nodes(root);
                 printf("\n");
