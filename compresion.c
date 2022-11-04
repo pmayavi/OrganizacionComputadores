@@ -15,7 +15,6 @@ struct node
 
 struct node *new_node(int uses, char char_element, struct node *father)
 {
-    printf("boing1.2");
     struct node *temp = (struct node *)malloc(sizeof(struct node)); // Allocating memory to the node
     temp->data_element = 1;
     temp->uses = uses;
@@ -69,19 +68,15 @@ int main()
     }
     fclose(fp);
     printf("%s", input);
-    printf("boing0");
     char letters[107];
     size_t let = 0;
-    printf("boing1");
     int num[107];
     int new;
-    printf("boing1.1");
     struct node *root = new_node(0, 0, NULL);
-    printf("boing2");
+    return 0;
     for (size_t i = 0; i < strlen(input); i++)
     {
         new = 1;
-        printf("boing3");
         for (size_t j = 0; j < strlen(letters); j++)
         {
             if (input[i] == letters[j])
@@ -90,14 +85,12 @@ int main()
                 break;
             }
         }
-        printf("boing4");
         if (new)
         {
             letters[let++] = input[i];
             insert(root, new_node(1, input[i], root));
         }
     }
-    printf("boing5");
     display(root); // Function to display the binary tree elements
 
     return 0;
