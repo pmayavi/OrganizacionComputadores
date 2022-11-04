@@ -84,7 +84,20 @@ void ParentValue(struct node *node)
 
 int compare(struct node *node)
 {
-    //
+    struct node *temp = node->parent;
+    struct node *ex = NULL;
+    if (temp->parent && temp->parent->right->data_element != temp->data_element)
+    {
+        do
+        {
+            temp = temp->parent;
+            if (node->uses > temp->right->uses)
+                ex = temp;
+        } while (temp->parent);
+        // printf("node:%d > temp:%d\n", node->uses, ex->right->uses);
+        if (ex)
+            exchange(node->parent, ex->right);
+    }
 }
 
 struct node *find(struct node *node, char c)
