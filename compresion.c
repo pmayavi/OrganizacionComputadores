@@ -95,11 +95,13 @@ int compare(struct node *node)
         {
             temp = temp->parent;
             if (node->uses > temp->right->uses)
-                ex = temp;
+                ex = temp->right;
+            if (node->uses > temp->left->uses)
+                ex = temp->left;
         } while (temp->parent);
         // printf("node:%d > temp:%d\n", node->uses, ex->right->uses);
         if (ex)
-            exchange(node->parent, ex->right);
+            exchange(node->parent, ex);
     }
 }
 
