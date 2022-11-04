@@ -86,8 +86,6 @@ int main()
         }
         if (new)
         {
-
-            return 0;
             letters[let++] = input[i];
             insert(root, new_node(1, input[i], root));
         }
