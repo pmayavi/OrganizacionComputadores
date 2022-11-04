@@ -73,11 +73,10 @@ int main()
     int num[107];
     int new;
     struct node *root = new_node(0, 0, NULL);
-    return 0;
-    for (size_t i = 0; i < strlen(input); i++)
+    for (size_t i = 0; i < strlen(input) - 1; i++)
     {
         new = 1;
-        for (size_t j = 0; j < strlen(letters); j++)
+        for (size_t j = 0; j < strlen(letters) - 1; j++)
         {
             if (input[i] == letters[j])
             {
@@ -87,6 +86,8 @@ int main()
         }
         if (new)
         {
+
+            return 0;
             letters[let++] = input[i];
             insert(root, new_node(1, input[i], root));
         }
