@@ -142,8 +142,10 @@ void print_nodes(struct node *node, char binary[], int position)
             position++;
         }
     }
-    print_nodes(node->left, binary, position);
-    print_nodes(node->right, binary, position);
+    if (node->left)
+        print_nodes(node->left, binary, position);
+    if (node->right)
+        print_nodes(node->right, binary, position);
 }
 
 int main()
