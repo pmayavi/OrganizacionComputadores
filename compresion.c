@@ -143,9 +143,7 @@ int main()
         new = 1;
         for (size_t j = 0; j < strlen(letters); j++)
         {
-            printf("%c", -159);
-            printf("%c", input[i]);
-            if ((input[i] < 32 || input[i] > 127) && (input[i] > -159 || input[i] < -164))
+            if (input[i] < 32 || input[i] > 127)
             {
                 printf("Simbolo encontrado genera error de compresion");
                 exit(0);
