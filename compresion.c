@@ -94,7 +94,7 @@ int compare(struct node *node)
 {
     struct node *temp = node->parent;
     struct node *ex = NULL;
-    if (temp->parent)
+    if (temp->parent && temp->parent->parent->right->data_element != temp->parent->data_element)
     {
         do
         {
