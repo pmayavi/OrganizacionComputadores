@@ -1,4 +1,19 @@
 import json
+import time
+import threading
+
+class myThread (threading.Thread):
+   def __init__(self, threadID, name,string):
+      threading.Thread.__init__(self)
+      self.threadID = threadID
+      self.name = name
+      self.string=string
+   def run(self):
+      print ("Starting " + self.name)
+      threadLock.acquire()
+      Codificacion_Huffman(string, self.name)
+      threadLock.release()
+
 class Node:
     def __init__(self, nsize, uses, char_element, parent=None, left=None, right=None):
         self.num = nsize
@@ -160,7 +175,8 @@ def print2DUtil(root, space):
         print(end=" ")
     print2DUtil(root.left, space)
 
-def Codificacion_Huffman(data):
+
+def Codificacion_Huffman(data,name):
     N = 107
     nsize = (2 * N) - 1
     #inp = input()
@@ -195,9 +211,35 @@ def Codificacion_Huffman(data):
     #print(letters)
     #print(codes)
     encoding = Codificacion_Output(data,codes, NYTlist)
-    print(encoding)
+    print(name,": ",encoding)
     #print_nodes(root)
 
+
+def crearhilo(nombre,data,id):
+    thread=myThread(id,nombre,data)
+    thread.start()
+    return thread
+
+threadLock = threading.Lock()
 data = "aabcdad"
+length = len(data)   
+n = 3 
+chars = int(length/n)
+temp=0
+threads = []
+m=1
 print(data)
-Codificacion_Huffman(data)
+while n>0:
+    if n>1:
+        string=data[temp:temp+chars]
+        temp=temp+chars
+        n=n-1
+        threads.append(crearhilo("thread "+str(m),string,m))
+        m=m+1
+    else:
+        string=data[temp:]
+        temp=temp+chars
+        n=n-1
+        threads.append(crearhilo("thread "+str(m),string,m))
+        m=m+1
+time.sleep(100)
