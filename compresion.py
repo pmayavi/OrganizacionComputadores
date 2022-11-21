@@ -1,6 +1,7 @@
+import json
 class Node:
     def __init__(self, nsize, uses, char_element, parent=None, left=None, right=None):
-        self.data_element = nsize
+        self.num = nsize
         self.uses = uses
         self.char_element = char_element
         self.parent = parent
@@ -8,8 +9,11 @@ class Node:
         self.right = right
 
 codes = dict()
+NYT = ['']
+with open('letras.json', encoding="utf8") as json_file:
+    Letras = json.load(json_file)
 
-def insert(parent, node, nsize):
+def insert(parent, node, nsize, val=''):
     if (parent.char_element != 0):
         return
     if (not parent.right):
@@ -18,22 +22,43 @@ def insert(parent, node, nsize):
         nsize -= 1
         parent.left = Node(nsize, 0, 0)
         parent.left.parent = parent
+        NYT[0] = val + '0'
     else:
-        insert(parent.left, node, nsize)
-        insert(parent.right, node, nsize)
+        insert(parent.left, node, nsize, val + '0')
+        insert(parent.right, node, nsize, val + '1')
 
-def exchange(node, objective):
-    print('Exchange:', node.data_element, objective.data_element)
-    print('1:', node.parent.left.data_element, node.parent.right.data_element)
-    
-    if (node.parent.right.data_element == objective.data_element):
+def SwapHermanos(node, objective):
+    if (node.parent.right.num == objective.num):
         node.parent.right = node
         node.parent.left = objective
     else:
         node.parent.left = node
         node.parent.right = objective
-        
-    print('2:', node.parent.left.data_element, node.parent.right.data_element)
+    
+    temp = node.num
+    node.num = objective.num
+    objective.num = temp
+    
+    ParentValue(objective)
+    ParentValue(node)
+
+def SwapNodes(node, objective):
+    temp = node.parent
+    node.parent = objective.parent
+    if (node.parent.right.num == objective.num):
+        node.parent.right = node
+    else:
+        node.parent.left = node
+    
+    objective.parent = temp
+    if (objective.parent.right.num == node.num):
+        objective.parent.right = objective
+    else:
+        objective.parent.left = objective
+    
+    temp = node.num
+    node.num = objective.num
+    objective.num = temp
     
     ParentValue(objective)
     ParentValue(node)
@@ -50,40 +75,51 @@ def ParentValue(node):
     if (node.parent):
         ParentValue(node.parent)
 
-def compare(node):
+def CompareHermanos(node):
     temp = node.parent
     ex1 = None
     ex2 = None
     if (temp.parent): 
         while True:
-            if temp.parent.right.data_element != temp.data_element:
+            if temp.parent.right.num != temp.num:
                 temp = temp.parent
-                if (temp.left.uses > temp.right.uses):
-                    print(temp.left.uses, '>', temp.right.uses, temp.right.char_element, 'right')
+                if (temp.left.num < temp.right.num and temp.left.uses > temp.right.uses):
                     ex1 = temp.right
                     ex2 = temp.left
-                if (not temp.parent): 
-                    break
             else:
                 temp = temp.parent
-                if (temp.right.uses > temp.left.uses):
-                    print(temp.right.uses, '>', temp.left.uses, temp.left.char_element, 'left')
+                if (temp.left.num > temp.right.num and temp.right.uses > temp.left.uses):
                     ex1 = temp.left
                     ex2 = temp.right
-                if (not temp.parent): 
-                    break
+            if (not temp.parent): 
+                break
         if (ex1 and ex2):
-            exchange(ex2, ex1)
+            SwapHermanos(ex2, ex1)
             ParentValue(node)
             ParentValue(ex1)
 
+def CompareNodes(node):
+    temp = node.parent
+    if temp and temp.parent:
+        ex = None
+        while True:
+            temp = temp.parent
+            if (temp.right and temp.parent and not temp.right.right and temp.right.char_element != 0 and node.uses > temp.right.uses and temp.parent.right.num != temp.num):
+                ex = temp.right
+            if (temp.left and temp.parent and not temp.left.right and temp.left.char_element != 0 and node.uses > temp.left.uses and temp.parent.left.num != temp.num):
+                ex = temp.left
+            if (not temp.parent):
+                break
+        if (ex and node.num != ex.num):
+            SwapNodes(node, ex)
+
 def print_nodes(node, code=''):
     if (node.char_element):
-        print(node.char_element, node.uses, node.data_element, code)
+        print(node.char_element, node.uses, node.num, code)
+    if (node.left):
+        print_nodes(node.left, code +'0')  
     if (node.right):
         print_nodes(node.right, code + '1')
-    if (node.left):
-        print_nodes(node.left, code +'0')
 
 def Calcular_Codigos(node, val=''):
     if(node.right):
@@ -93,68 +129,75 @@ def Calcular_Codigos(node, val=''):
     if(not node.left and not node.right):
         codes[node.char_element] = val  
 
-def Codificacion_Output(data, coding):
+def Codificacion_Output(data, coding, NYTs):
     output = []
+    letters = dict()
+    count = -1
     for c in data:
-        output.append(coding[c])
+        if letters.get(c):
+            output.append(coding[c] + ' ')
+        else:
+            letters[c] = 1
+            if count >= 0:
+                output.append(NYTs[count] + ' ')
+            count += 1
+            if (c == ' '):
+                output.append("0000000" + ' ')
+            else: 
+                output.append(Letras[c] + ' ')
     
     string = ''.join([str(o) for o in output])    
     return string      
 
 COUNT = [10]
 def print2DUtil(root, space):
- 
-    # Base case
     if (root == None):
         return
- 
-    # Increase distance between levels
     space += COUNT[0]
- 
-    # Process right child first
     print2DUtil(root.right, space)
- 
-    # Print current node after space
-    # count
     print()
     for i in range(COUNT[0], space):
         print(end=" ")
-    print(root.char_element)
- 
-    # Process left child
     print2DUtil(root.left, space)
 
 def Codificacion_Huffman(data):
     N = 107
     nsize = (2 * N) - 1
     #inp = input()
+    NYTlist = []
     inp = data
     letters = dict()
     tree = dict()
     root = Node(nsize, 0, 0)
     nsize -= 1
+    error = False
     for i in inp:
-        new = True
+        if (not Letras.get(i)) and i != ' ':
+            print("Simbolo encontrado genera error de compresion")
+            return
         # Poner aqui el rango de chars, print("Simbolo encontrado genera error de compresion");
         if letters.get(i):
             letters[i] += 1
             node = tree.get(i)
             node.uses += 1
             ParentValue(node)
-            compare(node)
-            #print2DUtil(root, 0)
+            CompareNodes(node)
+            CompareHermanos(node)
         else: 
             letters[i] = 1
             newNode = Node(nsize, 1, i)
-            insert(root, newNode, nsize)    
+            insert(root, newNode, nsize) 
+            NYTlist.append(NYT[0])
             tree[i] = newNode
             nsize -= 2
     
     Calcular_Codigos(root)
-    encoding = Codificacion_Output(data,codes)
-    print("Output", encoding)
-    print_nodes(root)
+    #print(letters)
+    #print(codes)
+    encoding = Codificacion_Output(data,codes, NYTlist)
+    print(encoding)
+    #print_nodes(root)
 
-data = "AAAAAAABCCCCCCDDEEEEE"
+data = "aabcdad"
 print(data)
 Codificacion_Huffman(data)
