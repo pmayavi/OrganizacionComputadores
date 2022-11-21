@@ -221,35 +221,28 @@ def crearhilo(nombre,data,id):
     thread.start()
     return thread
 
-if len(sys.argv) == 3:
-    threadLock = threading.Lock()
-    file_name = str(sys.argv[1])
-    file = open(file_name,"r")
-    data=file.read()
-    length = len(data)
-    n = int(sys.argv[2])
-    chars = int(length/n)
-    temp=0
-    threads = []
-    m=1
-    print(data)
-    while n>0:
-        if n>1:
-            string=data[temp:temp+chars]
-            temp=temp+chars
-            n=n-1
-            threads.append(crearhilo("thread "+str(m),string,m))
-            m=m+1
-        else:
-            string=data[temp:]
-            temp=temp+chars
-            n=n-1
-            threads.append(crearhilo("thread "+str(m),string,m))
-            m=m+1
-    time.sleep(100)
-else:
-    print("Error - Introduce los argumentos correctamente")
-    print('Ejemplo: start compresion.exe "aabcdad" 3')
-    print ('Cerrando automatico en un minuto')
-    time.sleep(60)
 
+threadLock = threading.Lock()
+file_name = str(input())
+file = open(file_name,"r")
+data=file.read()
+length = len(data)
+n = int(input())
+chars = int(length/n)
+temp=0
+threads = []
+m=1
+print(data)
+while n>0:
+    if n>1:
+        threads.append(crearhilo("thread "+str(m),str(data[temp:temp+chars]),m))
+        temp=temp+chars
+        n=n-1
+        m=m+1
+    else:
+        string=data[temp:]
+        temp=temp+chars
+        n=n-1
+        threads.append(crearhilo("thread "+str(m),string,m))
+        m=m+1
+time.sleep(100)
