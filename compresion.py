@@ -40,42 +40,6 @@ def insert(parent, node, nsize, val=''):
         insert(parent.left, node, nsize, val + '0')
         insert(parent.right, node, nsize, val + '1')
 
-def SwapHermanos(node, objective):
-    if (node.parent.right.num == objective.num):
-        node.parent.right = node
-        node.parent.left = objective
-    else:
-        node.parent.left = node
-        node.parent.right = objective
-    
-    temp = node.num
-    node.num = objective.num
-    objective.num = temp
-    
-    ParentValue(objective)
-    ParentValue(node)
-
-def SwapNodes(node, objective):
-    temp = node.parent
-    node.parent = objective.parent
-    if (node.parent.right.num == objective.num):
-        node.parent.right = node
-    else:
-        node.parent.left = node
-    
-    objective.parent = temp
-    if (objective.parent.right.num == node.num):
-        objective.parent.right = objective
-    else:
-        objective.parent.left = objective
-    
-    temp = node.num
-    node.num = objective.num
-    objective.num = temp
-    
-    ParentValue(objective)
-    ParentValue(node)
-
 def ParentValue(node):
     Lchild = 0
     Rchild = 0
@@ -126,13 +90,49 @@ def CompareNodes(node):
         if (ex and node.num != ex.num):
             SwapNodes(node, ex)
 
-def print_nodes(node, code=''):
+def SwapHermanos(node, objective):
+    if (node.parent.right.num == objective.num):
+        node.parent.right = node
+        node.parent.left = objective
+    else:
+        node.parent.left = node
+        node.parent.right = objective
+    
+    temp = node.num
+    node.num = objective.num
+    objective.num = temp
+    
+    ParentValue(objective)
+    ParentValue(node)
+
+def SwapNodes(node, objective):
+    temp = node.parent
+    node.parent = objective.parent
+    if (node.parent.right.num == objective.num):
+        node.parent.right = node
+    else:
+        node.parent.left = node
+    
+    objective.parent = temp
+    if (objective.parent.right.num == node.num):
+        objective.parent.right = objective
+    else:
+        objective.parent.left = objective
+    
+    temp = node.num
+    node.num = objective.num
+    objective.num = temp
+    
+    ParentValue(objective)
+    ParentValue(node)
+
+def PrintNodes(node, code=''):
     if (node.char_element):
         print(node.char_element, node.uses, node.num, code)
     if (node.left):
-        print_nodes(node.left, code +'0')  
+        PrintNodes(node.left, code +'0')  
     if (node.right):
-        print_nodes(node.right, code + '1')
+        PrintNodes(node.right, code + '1')
 
 def Calcular_Codigos(node, val=''):
     if(node.right):
@@ -162,16 +162,16 @@ def Codificacion_Output(data, coding, NYTs):
     string = ''.join([str(o) for o in output])    
     return string      
 
-def print2DUtil(root, space):
+def Print2DUtil(root, space):
     COUNT = [10]
     if (root == None):
         return
     space += COUNT[0]
-    print2DUtil(root.right, space)
+    Print2DUtil(root.right, space)
     print()
     for i in range(COUNT[0], space):
         print(end=" ")
-    print2DUtil(root.left, space)
+    Print2DUtil(root.left, space)
 
 def Codificacion_Huffman(data,name):
     #print (name,":",data)
@@ -208,11 +208,11 @@ def Codificacion_Huffman(data,name):
     Calcular_Codigos(root)
     #print(letters)
     #print(codes)
-    #print_nodes(root)
+    #PrintNodes(root)
     encoding = Codificacion_Output(data,codes, NYTlist)
     print(name,": ",encoding)
 
-def crearhilo(nombre,data,id):
+def CrearHilo(nombre,data,id):
     thread=myThread(id,nombre,data)
     thread.start()
     return thread
@@ -234,13 +234,13 @@ if len(sys.argv) == 3:
             string=data[temp:temp+chars]
             temp=temp+chars
             n=n-1
-            threads.append(crearhilo("thread "+str(m),string,m))
+            threads.append(CrearHilo("thread "+str(m),string,m))
             m=m+1
         else:
             string=data[temp:]
             temp=temp+chars
             n=n-1
-            threads.append(crearhilo("thread "+str(m),string,m))
+            threads.append(CrearHilo("thread "+str(m),string,m))
             m=m+1
     print("fin")
     time.sleep(1000)
