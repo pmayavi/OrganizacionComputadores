@@ -1,15 +1,16 @@
 # Compresion de archivos por medio del Huffman adaptativo
 ## Practica 3 Organizacion de Computadores
-## Noviembre 2022
-## Profesor Jose Luis Montoya Pareja
-## Universidad Eafit
-
-### Pablo Maya Villegas
-### Andres Echeverri Jaramillo
-### Salomon Velez Perez
-
+### Noviembre 2022
+### Profesor Jose Luis Montoya Pareja
+### Universidad EAFIT
+***
+#### Pablo Maya Villegas
+#### Andres Echeverri Jaramillo
+#### Salomon Velez Perez
+***
 
 Hecho en Python3.11 compilado con auto-py-to-exe 2.24.1
+
 [Sustentacion en Youtube]()
 
 ### Descripcion del proyecto:
