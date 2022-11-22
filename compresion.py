@@ -150,16 +150,16 @@ def Codificacion_Output(data, coding, NYTs):
     count = -1
     for c in data:
         if letters.get(c):
-            output.append(coding[c] + ' ')
+            output.append(coding[c])
         else:
             letters[c] = 1
             if count >= 0:
-                output.append(NYTs[count] + ' ')
+                output.append(NYTs[count])
             count += 1
             if (c == ' '):
-                output.append("0000000" + ' ')
+                output.append("0000000")
             else: 
-                output.append(Letras[c] + ' ')
+                output.append(Letras[c])
     
     string = ''.join([str(o) for o in output])    
     return string      
@@ -224,7 +224,7 @@ def crearhilo(nombre,data,id):
 if len(sys.argv) == 3:
     threadLock = threading.Lock()
     file_name = str(sys.argv[1])
-    file = open(file_name,"r")
+    file = open(file_name,"r", encoding="utf8")
     data=file.read()
     length = len(data)
     n = int(sys.argv[2])
@@ -246,10 +246,11 @@ if len(sys.argv) == 3:
             n=n-1
             threads.append(crearhilo("thread "+str(m),string,m))
             m=m+1
-    time.sleep(100)
+    print("fin")
+    time.sleep(1000)
 else:
     print("Error - Introduce los argumentos correctamente")
-    print('Ejemplo: start compresion.exe "aabcdad" 3')
+    print('Ejemplo: start compresion.exe (path del archivo o si esta en la carpeta el nombre del archivo) 3')
     print ('Cerrando automatico en un minuto')
     time.sleep(60)
 
