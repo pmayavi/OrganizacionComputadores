@@ -177,7 +177,7 @@ def print2DUtil(root, space):
 
 
 def Codificacion_Huffman(data,name):
-    print (name,":",data)
+    #print (name,":",data)
     N = 107
     nsize = (2 * N) - 1
     #inp = input()
@@ -232,7 +232,7 @@ if len(sys.argv) == 3:
     temp=0
     threads = []
     m=1
-    print(data)
+    #print(data)
     while n>0:
         if n>1:
             string=data[temp:temp+chars]
