@@ -11,7 +11,7 @@
 
 Hecho en Python3.11 compilado con auto-py-to-exe 2.24.1
 
-[Sustentacion en Youtube]()
+[Sustentacion en Youtube](https://youtu.be/oOh7dPmUHSk)
 
 ### Descripcion del proyecto:
 Nuestro codigo va generando un arbol binario el cual puede ser re-balanceado con cada letra nueva que lee, es distinto a los algoritmos Huffman que vimos en internet ya que el arbol generado es casi que lineal y lo decidimos dejar asi porque es el algoritmo especifico que aprendimos en clase.
