@@ -1,7 +1,5 @@
-import json
-import time
-import threading
-import sys
+import json, time, threading, sys
+
 class myThread (threading.Thread):
    def __init__(self, threadID, name,string):
       threading.Thread.__init__(self)
@@ -164,8 +162,8 @@ def Codificacion_Output(data, coding, NYTs):
     string = ''.join([str(o) for o in output])    
     return string      
 
-COUNT = [10]
 def print2DUtil(root, space):
+    COUNT = [10]
     if (root == None):
         return
     space += COUNT[0]
@@ -174,7 +172,6 @@ def print2DUtil(root, space):
     for i in range(COUNT[0], space):
         print(end=" ")
     print2DUtil(root.left, space)
-
 
 def Codificacion_Huffman(data,name):
     #print (name,":",data)
@@ -211,10 +208,9 @@ def Codificacion_Huffman(data,name):
     Calcular_Codigos(root)
     #print(letters)
     #print(codes)
+    #print_nodes(root)
     encoding = Codificacion_Output(data,codes, NYTlist)
     print(name,": ",encoding)
-    #print_nodes(root)
-
 
 def crearhilo(nombre,data,id):
     thread=myThread(id,nombre,data)
